@@ -1,0 +1,51 @@
+.mat-card {
+  max-width: 600px;
+  width: 100%;
+  height: 100%;
+  margin-top: 2rem;
+  border-radius: 10px !important;
+  background: linear-gradient(145deg, #3b2ab4, #322397) !important;
+  background: -moz-linear-gradient(145deg, #3b2ab4, #322397) !important;
+  -webkit-box-shadow: 0 5px 10px -2px #000000 !important;
+  box-shadow: 0 5px 10px -2px #000000 !important;
+
+}
+.custom-tooltip{
+  background: #3b2ab4;
+}
+.mat-icon{
+  margin-right: 1rem;
+  cursor: pointer;
+
+  &.disabled{
+    pointer-events: none;
+
+  }
+
+
+
+}
+.mat-form-field{
+  margin-right: 3rem;
+
+  .mat-form-field-underline{
+    background-color: #fff
+  }
+  input{
+    color: #fff;
+  }
+}
+.mat-form-field-label {
+  color: #fff !important;
+  font-size: 20px;
+}
+.mat-focused .mat-form-field-label {
+  color: #fff !important;
+  font-size: 20px;
+}
+.mat-raised-button[disabled]:not([class*=mat-elevation-z]){
+  border:1px solid #fff;
+  color: #fff;
+}
+
+
