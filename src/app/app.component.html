@@ -37,12 +37,14 @@
 </header>
 
 
-<div class="container" *ngIf="showAddForm">
+<div class="container"  [class.show]="showAddForm">
   <mat-card>
+
     <form [formGroup]="addCategoryForm" class="card-form">
+      <h3>{{tittle_button_text}}</h3>
       <div class="category_name">
         <mat-form-field>
-          <input matInput placeholder="Add category" formControlName="name">
+          <input matInput placeholder="Category Name" formControlName="name">
         </mat-form-field>
       </div>
       <div class="location" formGroupName="location">
@@ -68,16 +70,15 @@
     </form>
     <div class="actions">
       <button mat-raised-button [color]="'secondary'" [disabled]="addCategoryForm.invalid"
-              (click)="addCategory(addCategoryForm.value,button_name)">{{button_name}}</button>
+              (click)="addCategory(addCategoryForm.value,tittle_button_text)">{{tittle_button_text}}</button>
 
     </div>
   </mat-card>
 </div>
 
 
-<div class="categories-list" *ngIf="categoryList;else categoriesFromLS">
-  <!--  <p *ngFor="let category of categoryList| async">-->
-  <!--    {{category| json}}-->
+<div class="categories-list" *ngIf="categoryList;else categoriesFromLS" [ngClass]="{'hide': categoryListFromLS.length === 0}">
+  <h3>All Categories</h3>
   <ul>
     <li *ngFor="let category of categoryList| async;let i=index"
         [ngClass]="{'isActive': categoryListFromLS[i] === selectedCategory}"
@@ -88,8 +89,9 @@
 </div>
 
 
-<ng-template #categoriesFromLS>
-  <div class="categories-list" *ngIf="categoryListFromLS.length>0">
+<ng-template #categoriesFromLS >
+  <div class="categories-list" [ngClass]="{'hide': categoryListFromLS.length === 0}">
+    <h3>All Categories</h3>
     <ul *ngIf="categoryListFromLS.length>0">
       <li *ngFor="let category of categoryListFromLS;let i=index"
           [ngClass]="{'isActive': categoryListFromLS[i] === selectedCategory}"

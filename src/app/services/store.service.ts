@@ -29,11 +29,11 @@ export class StoreService {
 
   addCategory(category: Category) {
     this.categories.push(category);
-    this.categories.forEach((el)=>{
-      if(el === category){
-        console.log('same category');
-      }
-    })
+    // this.categories.forEach((el)=>{
+    //   if(el === category){
+    //     console.log('same category');
+    //   }
+    // })
     this.lsService.addToLocalStorage(category);
   }
 

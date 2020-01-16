@@ -21,9 +21,10 @@ export class AppComponent implements OnInit {
   private categoryIndex: number;
   private selectedCategory: Category;
   isUpdate: boolean = false;
-  button_name: string = '';
+  tittle_button_text: string = '';
   private isActive: boolean = false;
   showAddForm: boolean = false;
+  title: string = '';
 
   constructor(private fb: FormBuilder,
               private store: StoreService,
@@ -43,7 +44,7 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // this.initializeForm();
+    this.initializeForm();
   }
 
   initializeForm() {
@@ -60,7 +61,8 @@ export class AppComponent implements OnInit {
         category: ['', Validators.required]
       })
     });
-    this.button_name = 'Add Category';
+    this.tittle_button_text = 'Add Category';
+
 
   }
 
@@ -69,7 +71,7 @@ export class AppComponent implements OnInit {
       case 'Add Category':
         this.store.addCategory(form);
         this.addCategoryForm.reset();
-        this.selectedCategory.name = '';
+
         this.getFromLS();
         break;
       case 'Update Category':
@@ -95,13 +97,14 @@ export class AppComponent implements OnInit {
     this.store.removeCategory(this.categoryIndex);
     this.selectedCategory.name = '';
     this.getFromLS();
+    // this.showAddForm = false;
 
   }
 
   onUpdateCategory(category: Category, index) {
     this.isUpdate = true;
     this.showAddForm = true;
-    this.button_name = 'Update Category';
+    this.tittle_button_text = 'Update Category';
     this.addCategoryForm = this.fb.group({
       name: [category.name, Validators.required],
       location: this.fb.group({
