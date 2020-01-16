@@ -7,19 +7,32 @@ import {Category} from '../models/category';
   providedIn: 'root'
 })
 export class LocalStorageService {
+  categoryListFromLS: Category[] = [];
 
   constructor() {
+    this.categoryListFromLS = JSON.parse(localStorage.getItem('categories'));
 
   }
 
-  saveToLocalStorage(categories: Category[]) {
+  addToLocalStorage(category: Category) {
+    this.categoryListFromLS.push(category);
+    localStorage.setItem('categories', JSON.stringify(this.categoryListFromLS));
+  }
 
-    // if (localStorage.getItem('categories') !== null) {
-    //   localStorage.clear();
-    //   localStorage.setItem('categories', JSON.stringify(categories));
-    // } else {
-    //   // localStorage.clear();
-    //   localStorage.setItem('categories', JSON.stringify(categories));
-    // }
+  updateLocalStorage(category: Category, id) {
+    const categoryLSIndexToUpdate = this.categoryListFromLS.findIndex((el: Category) => this.categoryListFromLS.indexOf(el) === id);
+    if (categoryLSIndexToUpdate === -1) {
+      this.categoryListFromLS.push(category);
+      localStorage.setItem('categories', JSON.stringify(this.categoryListFromLS));
+    } else {
+      this.categoryListFromLS[categoryLSIndexToUpdate] = category;
+      localStorage.setItem('categories', JSON.stringify(this.categoryListFromLS));
+
+    }
+  }
+
+  deleteFromLocalStorage(id) {
+    this.categoryListFromLS.splice(id, 1);
+    localStorage.setItem('categories', JSON.stringify(this.categoryListFromLS));
   }
 }

@@ -13,7 +13,6 @@ import {LocalStorageService} from './local-storage.service';
 export class StoreService {
   private readonly _categories = new BehaviorSubject<Category[]>([]);
   readonly categories$ = this._categories.asObservable().pipe(shareReplay(1));
-  list = [];
 
   constructor(private lsService: LocalStorageService) {
 
@@ -30,51 +29,29 @@ export class StoreService {
 
   addCategory(category: Category) {
     this.categories.push(category);
-
-
-    this.list = JSON.parse(localStorage.getItem('categories'));
-    if (this.list.length > 0) {
-      this.list.push(category);
-      localStorage.setItem('categories', JSON.stringify(this.list));
-
-    } else {
-      localStorage.setItem('categories', JSON.stringify(this.categories));
-    }
-
-
+    this.categories.forEach((el)=>{
+      if(el === category){
+        console.log('same category');
+      }
+    })
+    this.lsService.addToLocalStorage(category);
   }
 
-  saveToLS(category) {
-
-  }
 
   updateCategory(category: Category, index) {
     const categoryIndexToUpdate = this.categories.findIndex((item) => this.categories.indexOf(item) === index);
-    // this.list = JSON.parse(localStorage.getItem('categories'));
-    const categoryLSIndexToUpdate = this.list.findIndex((el: Category) => this.list.indexOf(el) === index);
     if (categoryIndexToUpdate === -1) {
       this.categories.push(category);
     } else {
       this.categories[categoryIndexToUpdate] = category;
 
     }
-    if (categoryLSIndexToUpdate === -1) {
-      this.list.push(category);
-      localStorage.setItem('categories', JSON.stringify(this.list));
-    } else {
-      this.list[categoryLSIndexToUpdate] = category;
-      localStorage.setItem('categories', JSON.stringify(this.list));
-
-    }
-
+    this.lsService.updateLocalStorage(category, index);
   }
 
   removeCategory(id: number) {
     this.categories.splice(id, 1);
-    this.list.splice(id, 1);
-    localStorage.setItem('categories', JSON.stringify(this.list));
-
-
+    this.lsService.deleteFromLocalStorage(id);
   }
 
 

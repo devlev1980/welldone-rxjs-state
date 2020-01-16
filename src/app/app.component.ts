@@ -69,10 +69,12 @@ export class AppComponent implements OnInit {
       case 'Add Category':
         this.store.addCategory(form);
         this.addCategoryForm.reset();
+        this.selectedCategory.name = '';
         this.getFromLS();
         break;
       case 'Update Category':
         this.store.updateCategory(form, this.categoryIndex);
+        this.selectedCategory.name = '';
         this.getFromLS();
         break;
     }
@@ -91,6 +93,7 @@ export class AppComponent implements OnInit {
 
   onRemoveCategory() {
     this.store.removeCategory(this.categoryIndex);
+    this.selectedCategory.name = '';
     this.getFromLS();
 
   }
