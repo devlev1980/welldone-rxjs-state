@@ -88,7 +88,7 @@
 
 
 <ng-template #categoriesFromLS>
-  <div class="categories-list">
+  <div class="categories-list" *ngIf="categoryListFromLS.length>0">
     <ul *ngIf="categoryListFromLS.length>0">
       <li *ngFor="let category of categoryListFromLS;let i=index"
           [ngClass]="{'isActive': categoryListFromLS[i] === selectedCategory}"

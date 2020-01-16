@@ -71,7 +71,7 @@ export class StoreService {
 
   removeCategory(id: number) {
     this.categories.splice(id, 1);
-    this.list.splice(id,1);
+    this.list.splice(id, 1);
     localStorage.setItem('categories', JSON.stringify(this.list));
 
 
