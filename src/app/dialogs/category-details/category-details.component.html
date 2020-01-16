@@ -1,0 +1,44 @@
+
+<div class="container">
+
+  <ul>
+    <li>
+      <label>Category Name:</label>
+      <span>{{this.data.category.name}}</span>
+    </li>
+    <li>
+      <label>Location Name:</label>
+      <span>{{this.data.category.location.name}}</span>
+    </li>
+    <li>
+      <label>Location Address:</label>
+      <span>{{this.data.category.location.address}}</span>
+    </li>
+    <li>
+      <label>Location Longitude:</label>
+      <span>{{this.data.category.location.coordinates.longitude}}</span>
+    </li>
+    <li>
+      <label>Location Latitude:</label>
+      <span>{{this.data.category.location.coordinates.latitude}}</span>
+    </li>
+    <li>
+      <label>Location Category:</label>
+      <span>{{this.data.category.location.category}}</span>
+    </li>
+  </ul>
+  <div class="actions">
+    <button mat-raised-button (click)="onCloseDialog()">Close</button>
+  </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+

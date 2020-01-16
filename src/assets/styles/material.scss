@@ -47,5 +47,14 @@
   border:1px solid #fff;
   color: #fff;
 }
+.cdk-overlay-pane{
+  position: absolute !important;
+  //top:10% !important;
+
+}
+.mat-dialog-container {
+  background: linear-gradient(145deg, #3b2ab4, #322397) !important;
+  background: -moz-linear-gradient(145deg, #3b2ab4, #322397) !important;
+}
 
 

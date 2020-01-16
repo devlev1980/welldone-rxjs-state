@@ -1,19 +1,42 @@
 <header class="header">
-  <ul >
+  <ul>
     <li>
-      <h3 >{{selectedCategory?.name}}</h3>
+      <h3 [ngClass]="{'isActive': isActive}">{{selectedCategory?.name}}</h3>
+
     </li>
     <li >
-      <mat-icon [ngClass]="{'disabled': !selectedCategory?.name}"  [ngStyle]="{'color':'white'}" matTooltip="Edit Category" matTooltipClass="custom-tooltip" (click)="onUpdateCategory(selectedCategory,categoryIndex)" >edit</mat-icon>
+      <mat-icon [ngStyle]="{'color':'white'}"
+                matTooltip="Add New Category"  matTooltipClass="custom-tooltip"
+                (click)="onAddCategory()">
+        add
+      </mat-icon>
+
+    </li>
+
+
+    <li>
+      <mat-icon [ngClass]="{'disabled': !selectedCategory?.name}" [ngStyle]="{'color':'white'}"
+                matTooltip="View Details" matTooltipClass="custom-tooltip" (click)="onViewDetails()">
+        remove_red_eye
+      </mat-icon>
+
     </li>
     <li>
-      <mat-icon [ngClass]="{'disabled': !selectedCategory?.name}" [ngStyle]="{'color':'white'}"matTooltip="Delete Category" matTooltipClass="custom-tooltip" (click)="onRemoveCategory()">delete</mat-icon>
+      <mat-icon [ngClass]="{'disabled': !selectedCategory?.name}" [ngStyle]="{'color':'white'}"
+                matTooltip="Edit Category" matTooltipClass="custom-tooltip"
+                (click)="onUpdateCategory(selectedCategory,categoryIndex)">edit
+      </mat-icon>
+    </li>
+    <li>
+      <mat-icon [ngClass]="{'disabled': !selectedCategory?.name}" [ngStyle]="{'color':'white'}"
+                matTooltip="Delete Category" matTooltipClass="custom-tooltip" (click)="onRemoveCategory()">delete
+      </mat-icon>
     </li>
   </ul>
 </header>
 
 
-<div class="container">
+<div class="container" *ngIf="showAddForm">
   <mat-card>
     <form [formGroup]="addCategoryForm" class="card-form">
       <div class="category_name">
@@ -43,21 +66,37 @@
 
     </form>
     <div class="actions">
-      <button mat-raised-button [color]="'secondary'" [disabled]="addCategoryForm.invalid" (click)="addCategory(addCategoryForm.value,button_name)">{{button_name}}</button>
+      <button mat-raised-button [color]="'secondary'" [disabled]="addCategoryForm.invalid"
+              (click)="addCategory(addCategoryForm.value,button_name)">{{button_name}}</button>
 
     </div>
   </mat-card>
 </div>
 
 
-<div class="categories-list" *ngIf="categoryList">
-<!--  <p *ngFor="let category of categoryList| async">-->
-<!--    {{category| json}}-->
+<div class="categories-list" *ngIf="categoryList;else categoriesFromLS">
+  <!--  <p *ngFor="let category of categoryList| async">-->
+  <!--    {{category| json}}-->
   <ul>
-    <li *ngFor="let category of categoryList| async;let i=index"  (click)="onSelectCategory(category,i)">{{category.name}}</li>
+    <li *ngFor="let category of categoryList| async;let i=index"
+        [ngClass]="{'isActive': categoryListFromLS[i] === selectedCategory}"
+        (click)="onSelectCategory(category,i)">{{category.name}}</li>
   </ul>
-<!--  </p>-->
+
+
 </div>
+
+
+<ng-template #categoriesFromLS>
+  <div class="categories-list">
+    <ul *ngIf="categoryListFromLS.length>0">
+      <li *ngFor="let category of categoryListFromLS;let i=index"
+          [ngClass]="{'isActive': categoryListFromLS[i] === selectedCategory}"
+          (click)="onSelectCategory(category,i)">{{category.name}}</li>
+    </ul>
+  </div>
+</ng-template>
+
 
 <!--<div class="container" *ngIf="categories">-->
 <!--  <h3>Categories</h3>-->
