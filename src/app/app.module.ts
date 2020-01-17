@@ -15,13 +15,11 @@ import {
 } from '@angular/material';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { CategoryDetailsComponent } from './dialogs/category-details/category-details.component';
-import { AddCategoryComponent } from './components/add-category/add-category.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     CategoryDetailsComponent,
-    AddCategoryComponent
   ],
   imports: [
     BrowserModule,

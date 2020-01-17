@@ -24,7 +24,6 @@ export class AppComponent implements OnInit {
   tittle_button_text: string = '';
   private isActive: boolean = false;
   showAddForm: boolean = false;
-  title: string = '';
 
   constructor(private fb: FormBuilder,
               private store: StoreService,
@@ -39,7 +38,7 @@ export class AppComponent implements OnInit {
   }
 
   getFromLS() {
-    let list = localStorage.getItem('categories');
+    const list = localStorage.getItem('categories');
     this.categoryListFromLS = JSON.parse(list);
   }
 
@@ -97,8 +96,6 @@ export class AppComponent implements OnInit {
     this.store.removeCategory(this.categoryIndex);
     this.selectedCategory.name = '';
     this.getFromLS();
-    // this.showAddForm = false;
-
   }
 
   onUpdateCategory(category: Category, index) {
@@ -137,7 +134,7 @@ export class AppComponent implements OnInit {
 
   onAddCategory() {
     this.showAddForm = true;
-    this.initializeForm();
+    // this.initializeForm();
   }
 
   onEditCategory() {

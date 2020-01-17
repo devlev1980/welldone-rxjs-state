@@ -7,11 +7,15 @@ import {Category} from '../models/category';
   providedIn: 'root'
 })
 export class LocalStorageService {
-  categoryListFromLS: Category[];
+  categoryListFromLS: Category[] = [];
 
   constructor() {
+    if (JSON.parse(localStorage.getItem('categories')) !== null) {
+      this.categoryListFromLS = JSON.parse(localStorage.getItem('categories'));
+    } else {
+      this.categoryListFromLS = [];
+    }
 
-    this.categoryListFromLS = JSON.parse(localStorage.getItem('categories'));
   }
 
   addToLocalStorage(category: Category) {
