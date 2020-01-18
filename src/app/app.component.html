@@ -94,7 +94,7 @@
     <h3>All Categories</h3>
     <ul *ngIf="categoryListFromLS.length>0">
       <li *ngFor="let category of categoryListFromLS;let i=index"
-          [ngClass]="{'isActive': categoryListFromLS[i] === selectedCategory}"
+          [ngClass]="{'isActive': category === selectedCategory}"
           (click)="onSelectCategory(category,i)">{{category.name}}</li>
     </ul>
   </div>
