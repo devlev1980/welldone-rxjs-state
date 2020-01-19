@@ -41,24 +41,11 @@ header.header{
 .container{
   display: flex;
   justify-content: center;
-  opacity: 0;
   padding: 1rem;
 
 
-  &.show{
-    display: flex;
-    opacity: 1;
-  }
-
-
-  .category_name{
-    //text-align: center;
-  }
   .location{
-    //display: flex;
-    //flex-wrap: wrap;
     max-width: 76%;
-    //margin: auto;
   }
   .actions{
     text-align: right;
@@ -78,7 +65,6 @@ header.header{
   padding: 0.5rem 1rem;
   color: #fff;
   text-align: center;
-  //height: 380px;
 
   &.hide{
     display: none;

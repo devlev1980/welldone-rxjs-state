@@ -1,20 +1,16 @@
 <header class="header">
   <ul>
     <li>
-<!--      <h1>Category: </h1>-->
       <h3 [ngClass]="{'isActive': isActive}">{{selectedCategory?.name}}</h3>
 
     </li>
     <li >
-
       <mat-icon [ngStyle]="{'color':'white'}"
                 matTooltip="Add New Category"  matTooltipClass="custom-tooltip"
                 (click)="onAddCategory()" >
         add
       </mat-icon>
-
     </li>
-
 
     <li>
       <mat-icon [ngClass]="{'disabled': !selectedCategory?.name|| categoryListFromLS.length === 0}" [ngStyle]="{'color':'white'}"
@@ -38,7 +34,7 @@
 </header>
 
 
-<div class="container"  [class.show]="showAddForm">
+<div class="container"  *ngIf="showAddForm">
   <mat-card>
 
     <form [formGroup]="addCategoryForm" class="card-form">
@@ -57,10 +53,10 @@
         </mat-form-field>
         <div class="coordinates" formGroupName="coordinates">
           <mat-form-field>
-            <input matInput placeholder="Longitude" formControlName="longitude">
+            <input matInput placeholder="Longitude" type="number" formControlName="longitude">
           </mat-form-field>
           <mat-form-field>
-            <input matInput placeholder="Latitude" formControlName="latitude">
+            <input matInput placeholder="Latitude" type="number" formControlName="latitude">
           </mat-form-field>
         </div>
         <mat-form-field>
@@ -70,7 +66,7 @@
 
     </form>
     <div class="actions">
-      <button mat-raised-button [color]="'secondary'" [disabled]="addCategoryForm.invalid"
+      <button mat-raised-button  [disabled]="addCategoryForm.invalid"
               (click)="addCategory(addCategoryForm.value,tittle_button_text)">{{tittle_button_text}}</button>
 
     </div>
@@ -101,10 +97,5 @@
 </ng-template>
 
 
-<div class="container" *ngIf="categories">
-  <h3>Categories</h3>
-  <ul>
-    <li *ngFor="let category of categories| async;let i=index"  (click)="onSelectCategory(category,i)">{{category.name}}</li>
-  </ul>
-</div>
+
 

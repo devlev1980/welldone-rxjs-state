@@ -1,13 +1,11 @@
 import {Component} from '@angular/core';
 import {OnInit} from '@angular/core';
 import {Observable} from 'rxjs';
-import {Action} from 'rxjs/internal/scheduler/Action';
 import {StoreService} from './services/store.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Category} from './models/category';
 import {MatDialog} from '@angular/material';
 import {CategoryDetailsComponent} from './dialogs/category-details/category-details.component';
-import {LocalStorageService} from './services/local-storage.service';
 
 @Component({
   selector: 'app-root',
@@ -51,11 +49,11 @@ export class AppComponent implements OnInit {
     this.addCategoryForm = this.fb.group({
       name: ['', Validators.required],
       location: this.fb.group({
-        address: ['Tel-Aviv', Validators.required],
-        name: ['TA', Validators.required],
+        address: ['', Validators.required],
+        name: ['', Validators.required],
         coordinates: this.fb.group({
-          longitude: ['24.251', Validators.required],
-          latitude: ['25.361', Validators.required]
+          longitude: ['', Validators.required],
+          latitude: ['', Validators.required]
         }),
         category: ['', Validators.required]
       })
@@ -77,6 +75,7 @@ export class AppComponent implements OnInit {
         this.store.updateCategory(form, this.categoryIndex);
         this.selectedCategory.name = '';
         this.getFromLS();
+        this.showAddForm = false;
         break;
     }
 
@@ -95,6 +94,7 @@ export class AppComponent implements OnInit {
   onRemoveCategory() {
     this.store.removeCategory(this.categoryIndex);
     this.selectedCategory.name = '';
+    this.showAddForm = false;
     this.getFromLS();
   }
 
@@ -116,7 +116,7 @@ export class AppComponent implements OnInit {
     });
     this.getFromLS();
     this.isUpdate = false;
-    // this.store.updateCategory(category);
+    // this.showAddForm = false;
   }
 
   onViewDetails() {
@@ -134,10 +134,6 @@ export class AppComponent implements OnInit {
 
   onAddCategory() {
     this.showAddForm = true;
-    // this.initializeForm();
   }
 
-  onEditCategory() {
-
-  }
 }

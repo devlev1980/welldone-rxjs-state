@@ -11,7 +11,7 @@ import {LocalStorageService} from './local-storage.service';
 
 
 export class StoreService {
-  private readonly _categories = new BehaviorSubject<Category[]>([]);
+  private  _categories = new BehaviorSubject<Category[]>([]);
   readonly categories$ = this._categories.asObservable().pipe(shareReplay(1));
 
   constructor(private lsService: LocalStorageService) {
@@ -29,11 +29,6 @@ export class StoreService {
 
   addCategory(category: Category) {
     this.categories.push(category);
-    // this.categories.forEach((el)=>{
-    //   if(el === category){
-    //     console.log('same category');
-    //   }
-    // })
     this.lsService.addToLocalStorage(category);
   }
 
